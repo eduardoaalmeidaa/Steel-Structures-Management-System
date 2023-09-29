@@ -4,9 +4,9 @@ Este é um sistema de gerenciamento desenvolvido em C# e SQL Server que permite 
 ## Pré-requisitos
 Antes de executar o aplicativo, certifique-se de que você tenha os seguintes pré-requisitos instalados:
 
-- Visual Studio (versão X.X ou superior)
-- SQL Server (versão X.X ou superior)
-- .NET Framework (versão X.X ou superior)
+- Visual Studio
+- SQL Server
+- .NET Framework 
 
 ## Configuração do Banco de Dados
 ### Abra o SQL Server Management Studio.
@@ -19,14 +19,14 @@ Substitua SEU_SERVIDOR pelo nome do seu servidor SQL e SEU_BANCO_DE_DADOS pelo n
  - Abra a solução no Visual Studio.
  - Certifique-se de definir o projeto da web como projeto de inicialização.
  - Pressione F5 para compilar e executar o aplicativo.
- - O aplicativo estará disponível em http://localhost:XXXX, onde XXXX é a porta padrão do servidor da web.
+ - O aplicativo estará disponível em http://localhost:7129, onde 7129 é a porta padrão do servidor da web.
 
 ## Recursos
 O aplicativo possui as seguintes funcionalidades:
 
 - Cadastro de Clientes: Registre informações de clientes, como nome, endereço, telefone, etc.
 - Cadastro de Serviços: Registre informações sobre os serviços prestados, incluindo descrição, custo, cliente associado, etc.
-- Página de Ferramentas: Gerencie a lista de ferramentas disponíveis para uso.
+- Página de Ferramentas: Gerencie as ferramentas disponíveis para uso como calculadoras, etc.
 
 ![image](https://github.com/eduardoaalmeidaa/AdmFagil/assets/89856553/53f6e1c4-5ca9-4436-924d-b73dc1eaad03)
 ![image](https://github.com/eduardoaalmeidaa/AdmFagil/assets/89856553/436b3107-2cfb-4c2d-9620-058572b33ff2)
