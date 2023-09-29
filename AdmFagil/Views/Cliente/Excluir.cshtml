@@ -1,0 +1,119 @@
+﻿@model ClienteModel
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+        h2 {
+            color: white;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        .custom-card {
+            background-color: #1859b5;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-form-label {
+            color: white;
+            font-weight: bold;
+        }
+
+        .custom-input::placeholder {
+            color: black;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-success {
+            background-color: #1859b5;
+            border-color: #1859b5;
+        }
+
+            .btn-success:hover {
+                background-color: #c82333;
+                border-color: #c82333;
+            }
+
+        .btn-primary {
+            background-color: #1859b5;
+            border-color: #1859b5;
+        }
+
+            .btn-primary:hover {
+                background-color: black;
+                border-color: #1859b5;
+            }
+
+        .custom-input:disabled {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 custom-card">
+                <h2 class="text-center">Excluir dados do Cliente</h2>
+
+                <form method="post" asp-controller="Cliente" asp-action="Excluir">
+                    <input type="hidden" asp-for="Id"> </>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="Nome">Nome:</label>
+                        <input type="text" asp-for="Nome" class="form-control custom-input" placeholder="Digite o nome do cliente." disabled>
+                        <span class="text-danger" asp-validation-for="Nome"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="Telefone">Telefone:</label>
+                        <input asp-for="Telefone" type="text" class="form-control custom-input" placeholder="Digite o telefone do cliente." disabled>
+                        <span class="text-danger" asp-validation-for="Telefone"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="Email">E-mail:</label>
+                        <input type="text" asp-for="Email" class="form-control custom-input" placeholder="Digite o e-mail do cliente." disabled>
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="CnpjCpf">CNPJ/CPF:</label>
+                        <input type="text" asp-for="CpfCnpj" class="form-control custom-input" placeholder="Digite o CNPJ/CPF do cliente." disabled>
+                        <span class="text-danger" asp-validation-for="CpfCnpj"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="Endereco">Endereço:</label>
+                        <input type="text" asp-for="Endereco" class="form-control custom-input" placeholder="Digite o endereço do cliente." disabled>
+                        <span class="text-danger" asp-validation-for="Endereco"></span>
+                    </div>
+
+                    <div class="btn-group mt-4">
+                        <button type="submit" class="btn btn-success">Excluir</button>
+                        <a class="btn btn-primary ml-2" asp-controller="Cliente" asp-action="Index">Voltar</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

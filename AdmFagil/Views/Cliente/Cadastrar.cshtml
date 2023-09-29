@@ -1,0 +1,136 @@
+﻿@model ClienteModel
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+        h2 {
+            color: white;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        .custom-card {
+            background-color: #1859b5;
+            border: 1px solid white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-form-label {
+            color: white;
+            font-weight: bold;
+        }
+
+        .custom-input::placeholder {
+            color: #999;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-success {
+            background-color: #1859b5;
+            border-color: #1859b5;
+        }
+
+            .btn-success:hover {
+                background-color: green;
+                border-color: green;
+            }
+
+        .btn-primary {
+            background-color: #1859b5;
+            border-color: #1859b5;
+        }
+
+            .btn-primary:hover {
+                background-color: black;
+                border-color: #1859b5;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 custom-card">
+                <h2 class="text-center">Cadastro de Cliente</h2>
+
+                <form method="post" asp-controller="Cliente" asp-action="Cadastrar">
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="Nome">Nome:</label>
+                        <input type="text" asp-for="Nome" class="form-control custom-input" placeholder="Digite o nome do cliente." oninput="validarNome(this)">
+                        <span class="text-danger" asp-validation-for="Nome"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="Telefone">Telefone:</label>
+                        <input type="number" asp-for="Telefone" class="form-control custom-input" placeholder="Digite o telefone do cliente.">
+                        <span class="text-danger" asp-validation-for="Telefone"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="Email">E-mail:</label>
+                        <input type="text" asp-for="Email" class="form-control custom-input" placeholder="Digite o e-mail do cliente.">
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="CnpjCpf">CNPJ/CPF:</label>
+                        <input type="number" asp-for="CpfCnpj" class="form-control custom-input" placeholder="Digite o CNPJ/CPF do cliente.">
+                        <span class="text-danger" asp-validation-for="CpfCnpj"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="custom-form-label" for="Endereco">Endereço:</label>
+                        <input type="text" asp-for="Endereco" class="form-control custom-input" placeholder="Digite o endereço do cliente.">
+                        <span class="text-danger" asp-validation-for="Endereco"></span>
+                    </div>
+
+                    <div class="btn-group mt-4">
+                        <button type="submit" class="btn btn-success">Adicionar</button>
+                        <a class="btn btn-primary ml-2" asp-controller="Cliente" asp-action="Index">Voltar</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function validarNome(input) {
+            input.value = input.value.replace(/[0-9]/g, '');
+        }
+
+        function formatCnpjCpf(input) {
+            var value = input.value.replace(/\D/g, '');
+
+            if (value.length === 12) {
+                input.value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            } else if (value.length === 15) {
+                input.value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+            }
+        }
+
+        var cnpjCpfInput = document.querySelector('input[name="CpfCnpj"]');
+        cnpjCpfInput.addEventListener('input', function () {
+            formatCnpjCpf(this);
+        });
+    </script>
+
+</body>
+
+</html>

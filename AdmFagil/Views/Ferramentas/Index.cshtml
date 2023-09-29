@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadoras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1859b5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        .calculator-container {
+            display: flex;
+        }
+
+        .calculator, .imc-calculator {
+            height: 700px;
+            width: 400px;
+            padding: 60px;
+            background-color: gray;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            font-size: 24px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-bottom: 2px solid #333;
+            margin-top: 20px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #555;
+            }
+
+        .imc-calculator {
+            margin-left: 20px;
+        }
+
+        element.style {
+            margin-top: 15px;
+        }
+
+        .h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #333;
+            color: yellow;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator">
+            <h2>Calculadora Científica</h2>
+            <input type="text" id="display" disabled>
+            <div class="buttons">
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('+')">+</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('-')">-</button>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('*')">*</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="calculateResult()">=</button>
+                <button onclick="appendToDisplay('/')">/</button>
+            </div>
+        </div>
+
+        <div class="imc-calculator">
+            <h2>Calculadora de IMC</h2>
+            <input type="text" id="weight" placeholder="Peso (kg)">
+            <input type="text" id="height" placeholder="Altura (m)">
+            <button onclick="calculateIMC()">Calcular IMC</button>
+            <input type="text" id="imcResult" placeholder="IMC" disabled>
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function calculateResult() {
+            try {
+                const expression = document.getElementById('display').value;
+                const result = eval(expression);
+                document.getElementById('display').value = result;
+            } catch (error) {
+                document.getElementById('display').value = 'Erro';
+            }
+        }
+
+        function deleteLastCharacter() {
+            const currentValue = document.getElementById('display').value;
+            document.getElementById('display').value = currentValue.slice(0, -1);
+        }
+
+        function calculateIMC() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (!isNaN(weight) && !isNaN(height) && height > 0) {
+                const imc = weight / (height * height);
+                document.getElementById('imcResult').value = imc.toFixed(2);
+            } else {
+                document.getElementById('imcResult').value = 'Erro';
+            }
+        }
+    </script>
+</body>
+</html>

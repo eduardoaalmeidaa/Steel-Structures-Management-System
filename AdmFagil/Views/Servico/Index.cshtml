@@ -1,0 +1,169 @@
+﻿@model IEnumerable<ServicoModel>
+
+<style>
+    .custom-table {
+        width: 100%;
+    }
+
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .custom-table th {
+            background-color: #1859b5;
+            color: white;
+        }
+
+        .custom-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+    .no-service {
+        font-style: italic;
+        color: #888;
+    }
+
+    .btn-action {
+        padding: 5px 10px;
+    }
+
+    .btn-success {
+        background-color: #1859b5;
+        color: #fff;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    .btn-warning {
+        background-color: #1859b5;
+        color: #fff;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .btn-danger {
+        background-color: #1859b5;
+        color: #fff;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+    .btn-group {
+        display: flex;
+        justify-content: center;
+    }
+
+        .btn-group a {
+            margin-right: 5px;
+        }
+
+    .dataTables_length {
+        padding: 3px 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
+        background: linear-gradient(45deg, #1859b5, white);
+        padding: 3px 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+        float: none;
+        text-align: center;
+        background: linear-gradient(45deg, #1859b5, white);
+        padding: 3px 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+</style>
+
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <a class="btn btn-success ml-auto" asp-controller="Servico" asp-action="Cadastrar">Cadastro de Serviço</a>
+                </div>
+
+                <div>
+                    <a class="btn btn-warning mt-1" asp-controller="Servico" asp-action="Exportar"><i class="bi bi-file-earmark-plus mx-2"></i>Exportar</a>
+                </div>
+
+                @if (TempData["MensagemSucesso"] != null)
+                {
+                    <div class="alert alert-success text-light mt-5" role="alert">
+                        @TempData["MensagemSucesso"]
+                    </div>
+                }
+
+                @if (TempData["MensagemErro"] != null)
+                {
+                    <div class="alert alert-danger text-light mt-5" role="alert">
+                        @TempData["MensagemErro"]
+                    </div>
+                }
+
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+
+                    <table id="cliente" class="table table-striped custom-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Descrição </th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Última Atualização</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var servico in Model)
+                                {
+                                    <tr>
+                                        <td>@servico.ServNome</td>
+                                        <td>@servico.ServDesc</td>
+                                        <td>@($"R$ {servico.Preco:F2}")</td>
+                                        <td>@servico.DataUltimaAtualizacao</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a asp-controller="Servico" asp-action="Editar" asp-route-id="@servico.Id" class="btn btn-warning btn-action">
+                                                    <i class="bi bi-pencil-square" style="font-size: 1rem;"></i> Editar
+                                                </a>
+                                                <a asp-controller="Servico" asp-action="Excluir" asp-route-id="@servico.Id" class="btn btn-danger btn-action">
+                                                    <i class="bi bi-trash3-fill" style="font-size: 1rem;"></i> Excluir
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center no-service">Nenhum serviço encontrado.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
